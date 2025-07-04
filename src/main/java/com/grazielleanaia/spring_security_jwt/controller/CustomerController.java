@@ -1,11 +1,10 @@
 package com.grazielleanaia.spring_security_jwt.controller;
 
-
-import com.grazielleanaia.customer_registration.business.CustomerService;
-import com.grazielleanaia.customer_registration.business.dto.CustomerDTO;
-import com.grazielleanaia.customer_registration.business.dto.PhoneDTO;
-import com.grazielleanaia.customer_registration.business.dto.ResidenceDTO;
-import com.grazielleanaia.customer_registration.infrastructure.security.JwtUtil;
+import com.grazielleanaia.spring_security_jwt.business.CustomerService;
+import com.grazielleanaia.spring_security_jwt.business.dto.CustomerDTO;
+import com.grazielleanaia.spring_security_jwt.business.dto.PhoneDTO;
+import com.grazielleanaia.spring_security_jwt.business.dto.ResidenceDTO;
+import com.grazielleanaia.spring_security_jwt.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +21,7 @@ public class CustomerController {
     private final CustomerService customerService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+
 
     @PostMapping
     public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customerDTO) {

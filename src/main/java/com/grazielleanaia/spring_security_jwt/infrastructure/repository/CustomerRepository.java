@@ -1,6 +1,7 @@
 package com.grazielleanaia.spring_security_jwt.infrastructure.repository;
 
-import com.grazielleanaia.customer_registration.infrastructure.entity.Customer;
+
+import com.grazielleanaia.spring_security_jwt.infrastructure.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
