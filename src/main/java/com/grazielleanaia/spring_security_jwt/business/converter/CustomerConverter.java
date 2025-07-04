@@ -1,12 +1,11 @@
 package com.grazielleanaia.spring_security_jwt.business.converter;
 
-
-import com.grazielleanaia.customer_registration.business.dto.CustomerDTO;
-import com.grazielleanaia.customer_registration.business.dto.PhoneDTO;
-import com.grazielleanaia.customer_registration.business.dto.ResidenceDTO;
-import com.grazielleanaia.customer_registration.infrastructure.entity.Customer;
-import com.grazielleanaia.customer_registration.infrastructure.entity.Phone;
-import com.grazielleanaia.customer_registration.infrastructure.entity.Residence;
+import com.grazielleanaia.spring_security_jwt.business.dto.CustomerDTO;
+import com.grazielleanaia.spring_security_jwt.business.dto.PhoneDTO;
+import com.grazielleanaia.spring_security_jwt.business.dto.ResidenceDTO;
+import com.grazielleanaia.spring_security_jwt.infrastructure.entity.Customer;
+import com.grazielleanaia.spring_security_jwt.infrastructure.entity.Phone;
+import com.grazielleanaia.spring_security_jwt.infrastructure.entity.Residence;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
