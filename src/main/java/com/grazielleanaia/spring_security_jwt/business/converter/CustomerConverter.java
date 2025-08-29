@@ -97,7 +97,6 @@ public class CustomerConverter {
                 .email(customerDTO.getEmail() != null ? customerDTO.getEmail() : customer.getEmail())
                 .password(customerDTO.getPassword() != null ? customerDTO.getPassword() : customer.getPassword())
                 .build();
-
     }
 
     public Phone updatePhone(PhoneDTO phoneDTO, Phone phone) {
@@ -117,8 +116,6 @@ public class CustomerConverter {
                 .zipcode(residenceDTO.getZipcode() != null ? residenceDTO.getZipcode() : residence.getZipcode())
                 .build();
     }
-
-    //Post methods to include residence and phone to an existent customer
 
     public Phone includePhone(PhoneDTO phoneDTO, Long customerId) {
         return Phone.builder()
