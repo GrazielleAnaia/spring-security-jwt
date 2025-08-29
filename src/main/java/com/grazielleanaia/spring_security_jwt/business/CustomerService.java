@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomerService {
 
+    private static final String CUSTOMER_NOT_FOUND = "Customer not found: ";
+
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final CustomerConverter customerConverter;
@@ -58,15 +60,15 @@ public class CustomerService {
                     new ResourceNotFoundException("Email not found." + email));
             return customerConverter.convertToCustomerDTO(customer);
         } catch (ResourceNotFoundException e) {
-            throw new ResourceNotFoundException("Customer not found.");
+            throw new ResourceNotFoundException(CUSTOMER_NOT_FOUND, e);
         }
     }
 
     public void deleteCustomerByEmail(String email) {
         try {
-            customerRepository.findByEmail(email).orElseThrow(
+            Customer emailFound = customerRepository.findByEmail(email).orElseThrow(
                     () -> new ResourceNotFoundException("Email not found" + email));
-            customerRepository.deleteByEmail(email);
+            customerRepository.deleteByEmail(String.valueOf(emailFound));
         } catch (ResourceNotFoundException e) {
             throw new ResourceNotFoundException("Customer not found", e.getCause());
         }
@@ -77,7 +79,7 @@ public class CustomerService {
     public CustomerDTO updateCustomer(String token, CustomerDTO customerDTO) {
         String email = jwtUtil.extractUsername(token);
         Customer customer = customerRepository.findByEmail(email).orElseThrow(() ->
-                new ResourceNotFoundException("Customer not found." + email));
+                new ResourceNotFoundException(CUSTOMER_NOT_FOUND + email));
 
         Customer customer1 = customerConverter.updateCustomer(customerDTO, customer);
         return customerConverter.convertToCustomerDTO(customerRepository.save(customer1));
@@ -103,7 +105,7 @@ public class CustomerService {
     public PhoneDTO includePhone(PhoneDTO phoneDTO, String token) {
         String email = jwtUtil.extractUsername(token.substring(7));
         Customer customer = customerRepository.findByEmail(email).orElseThrow(() ->
-                new ResourceNotFoundException("Customer not found." + email));
+                new ResourceNotFoundException(CUSTOMER_NOT_FOUND + email));
         Phone phone = customerConverter.includePhone(phoneDTO, customer.getId());
         Phone phone1 = phoneRepository.save(phone);
         return customerConverter.convertToPhoneDTO(phone1);
@@ -112,7 +114,7 @@ public class CustomerService {
     public ResidenceDTO includeResidence(ResidenceDTO residenceDTO, String token) {
         String email = jwtUtil.extractUsername(token.substring(7));
         Customer customer = customerRepository.findByEmail(email).orElseThrow(() ->
-                new ResourceNotFoundException("Customer not found." + email));
+                new ResourceNotFoundException(CUSTOMER_NOT_FOUND + email));
         Residence residence = customerConverter.includeResidence(residenceDTO, customer.getId());
         return customerConverter.convertToResidenceDTO(residenceRepository.save(residence));
     }
